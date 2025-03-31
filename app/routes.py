@@ -1,10 +1,11 @@
 import datetime
 from app import myapp_obj
-from flask import render_template
+from flask import render_template, session
 from flask import redirect
 from app.forms import LoginForm, RecipeForm
 from app.models import User, Recipe
 from app import db
+from sqlalchemy import select
 # from <X> import <Y>
 
 @myapp_obj.route("/")
@@ -50,3 +51,16 @@ def create_recipe():
     else:
         print("MOOOO MOOO BAD")
     return render_template("recipe_new.html", form=form)
+
+@myapp_obj.route("/recipes")
+def all_recipes():
+    all_recipes =Recipe.query.all()
+    return render_template("show_all_recipes.html", all_recipes=all_recipes)
+
+@myapp_obj.route("/recipe/<string:recipe_id>")
+def load_recipe(recipe_id):
+    print(recipe_id)
+    filter = select(Recipe).where(Recipe.id == int(recipe_id))
+    recipe = db.session.execute(filter).scalars().first()
+    print(recipe.title)
+    return render_template("load_recipe.html", recipe=recipe)
