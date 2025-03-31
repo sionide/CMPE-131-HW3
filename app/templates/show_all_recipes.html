@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>All Recipes</title>
+</head>
+<body>
+  <ul>
+    {% for recipe in all_recipes %}
+    <li>
+        {{recipe.title}}
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
