@@ -18,4 +18,5 @@ class Recipe(db.Model):
     created = db.Column(db.String())
 
     def __repr__(self):
+        # Represents the recipe with user id, title, and recipe id
         return f'user {self.user_id} made post {self.title}, post ID: {self.id}'
