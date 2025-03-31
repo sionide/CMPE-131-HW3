@@ -64,3 +64,13 @@ def load_recipe(recipe_id):
     recipe = db.session.execute(filter).scalars().first()
     print(recipe.title)
     return render_template("load_recipe.html", recipe=recipe)
+
+@myapp_obj.route("/recipe/<string:recipe_id>/delete")
+def delete_recipe(recipe_id):
+    print(recipe_id)
+    filter = select(Recipe).where(Recipe.id == int(recipe_id))
+    recipe = db.session.execute(filter).scalars().first()
+    db.session.delete(recipe)
+    db.session.commit()
+    print(recipe.title)
+    return f"{recipe.title} has been deleted"
