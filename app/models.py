@@ -1,5 +1,3 @@
-import datetime
-
 from app import db
 
 
@@ -19,3 +17,5 @@ class Recipe(db.Model):
     instructions = db.Column(db.String())
     created = db.Column(db.String())
 
+    def __repr__(self):
+        return f'user {self.user_id} made post {self.title}, post ID: {self.id}'
