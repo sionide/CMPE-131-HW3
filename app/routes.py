@@ -19,7 +19,6 @@ def create_recipe():
     if form.validate_on_submit(): # Checks if user input is valid
         # Creates a recipe
         recipe = Recipe(title=form.title.data,
-                        user_id=form.user_id.data,
                         description=form.description.data,
                         ingredients=form.ingredients.data,
                         instructions=form.instructions.data,
@@ -28,7 +27,7 @@ def create_recipe():
         # Adds a recipe to the database
         db.session.add(recipe)
         db.session.commit()
-        return redirect("/")
+        return redirect("/recipes")
     else:
         # User has invalid input
         print("MOOOO MOOO BAD")
